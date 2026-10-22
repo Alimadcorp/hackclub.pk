@@ -15,3 +15,14 @@ document.querySelectorAll('.accordion-toggle').forEach(button => {
     }
   })
 })
+
+fetch('https://haven.hackclub.com/api/signups')
+  .then(e => e.json())
+  .then(e => {
+    e.events.forEach((d) => {
+        const x = document.getElementById(d.slug + "-signup");
+        if (x) {
+            x.innerText = d.signups + "/" + Math.floor((d.signups - 1) / 100 + 1) + "00";
+        }
+    });
+  })
