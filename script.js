@@ -42,10 +42,15 @@ function getSignups () {
     })
 }
 
-function createEl (tag, className, innerHTML = '') {
+function createEl (tag, className, innerHTML = '', props = {}) {
   const el = document.createElement(tag)
   if (className) el.className = className
   if (innerHTML) el.innerHTML = innerHTML
+  if (props) {
+    console.log(props)
+    el.href = props.href
+    el.target = props.target
+  }
   return el
 }
 
@@ -71,10 +76,14 @@ function saturate (events) {
     )
     infoContainer.appendChild(
       createEl(
-        'div',
-        'flex items-center gap-2.5 text-gray-300',
+        event.venueUrl ? 'a' : 'div',
+        'flex items-center gap-2.5 text-gray-300 dont',
         `<i class="ph ph-map-pin flex items-center justify-center w-5"></i> 
-       <span class="leading-none">${event.venue || 'Unconfirmed'}</span>`
+       <span class="leading-none">${event.venue || 'Unconfirmed'}</span>`,
+        event.venueUrl ? {
+          href: 'https://' + event.venueUrl,
+          target: '_blank'
+        } : null
       )
     )
     card.appendChild(infoContainer)
@@ -108,11 +117,7 @@ function saturate (events) {
       link.href = href
       linksGrid.appendChild(link)
     }
-    addLink(
-      `https://haven.hackclub.com/${event.slug}`,
-      'ph ph-globe',
-      'Page'
-    )
+    addLink(`https://haven.hackclub.com/${event.slug}`, 'ph ph-globe', 'Page')
     if (event.insta)
       addLink(
         `https://instagram.com/${event.insta}`,
@@ -134,7 +139,11 @@ function saturate (events) {
       addLink(`https://wa.me/${event.wa}`, 'ph ph-whatsapp-logo', 'WhatsApp')
     if (event.custom) {
       for (const [key, value] of Object.entries(event.custom)) {
-        addLink(value, 'ph ph-' + (key == "Organize" ? 'clipboard' : 'info'), key)
+        addLink(
+          value,
+          'ph ph-' + (key == 'Organize' ? 'clipboard' : 'info'),
+          key
+        )
       }
     }
     accContent.appendChild(linksGrid)

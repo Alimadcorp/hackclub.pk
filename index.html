@@ -68,13 +68,13 @@
         ::selection {
           @apply text-black bg-white;
         }
-        a {
+        a:not(.dont) {
           @apply relative overflow-hidden;
         }
-        a::after {
+        a:not(.dont)::after {
           @apply content-[''] absolute top-0 right-0 w-0 h-full bg-white border-0 border-transparent rounded-[1.25rem] z-10 mix-blend-difference transition-[width,border-radius] ease-in pointer-events-none;
         }
-        a:hover::after {
+        a:not(.dont):hover::after {
           @apply left-0 right-auto border-0 border-white rounded-none w-full transition-[width] ease-in;
         }
       }
