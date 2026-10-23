@@ -189,23 +189,29 @@ fetch('/events.txt')
 
 const start = new Date('2026-11-14T10:00:00+05:00')
 
-const timer = setInterval(() => {
+let tmt = 2682060
+let tls = tmt * 1000
+
+const timer = () => {
   const now = new Date()
-  const timeLeftMs = start - now
-  if (timeLeftMs <= 0) {
+  const tml = start - now
+  const t = 0.08
+  tls = (1 - t) * tls + t * tml
+  if (tls <= 0) {
     clearInterval(timer)
     document.getElementById('clock').textContent = "It's started chat"
     return
   }
-  const days = Math.floor(timeLeftMs / (1000 * 60 * 60 * 24))
-  const hours = Math.floor(
-    (timeLeftMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  )
-  const minutes = Math.floor((timeLeftMs % (1000 * 60 * 60)) / (1000 * 60))
-  const seconds = Math.floor((timeLeftMs % (1000 * 60)) / 1000)
+  const days = Math.floor(tls / (1000 * 60 * 60 * 24))
+  const hours = Math.floor((tls % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+  const minutes = Math.floor((tls % (1000 * 60 * 60)) / (1000 * 60))
+  const seconds = Math.floor((tls % (1000 * 60)) / 1000)
   const pad = num => String(num).padStart(2, '0')
 
   document.getElementById('clock').textContent = `
     ${pad(days)}:${pad(hours)}:${pad(minutes)}:${pad(seconds)}
-  `
-}, 123)
+  `;
+  requestAnimationFrame(timer);
+}
+
+timer();
