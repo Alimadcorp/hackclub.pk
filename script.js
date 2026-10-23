@@ -42,7 +42,7 @@ function getSignups () {
     })
 }
 
-function createEl (tag, className, innerHTML = '', props = {}) {
+function create (tag, className, innerHTML = '', props = {}) {
   const el = document.createElement(tag)
   if (className) el.className = className
   if (innerHTML) el.innerHTML = innerHTML
@@ -57,16 +57,16 @@ function saturate (events) {
   const container = document.querySelector('.grid')
   container.innerHTML = ''
   events.forEach(event => {
-    const card = createEl('div', 'card')
+    const card = create('div', 'card')
     card.appendChild(
-      createEl('h2', 'text-2xl font-bold text-white mb-3', event.name)
+      create('h2', 'text-2xl font-bold text-white mb-3', event.name)
     )
-    const infoContainer = createEl(
+    const infoContainer = create(
       'div',
       'flex flex-col gap-0 mb-4 text-sm font-medium'
     )
     infoContainer.appendChild(
-      createEl(
+      create(
         'a',
         'flex items-center gap-2.5 text-gray-300 dont',
         `<i class="ph ph-users flex items-center justify-center w-5"></i> 
@@ -78,7 +78,7 @@ function saturate (events) {
       )
     )
     infoContainer.appendChild(
-      createEl(
+      create(
         event.venueUrl ? 'a' : 'div',
         'flex items-center gap-2.5 text-gray-300 dont',
         `<i class="ph ph-map-pin flex items-center justify-center w-5"></i> 
@@ -92,29 +92,29 @@ function saturate (events) {
       )
     )
     card.appendChild(infoContainer)
-    const signUpBtn = createEl('a', 'btn-primary', 'Sign Up Now')
+    const signUpBtn = create('a', 'btn-primary', 'Sign Up Now')
     signUpBtn.href = `https://forms.hackclub.com/haven-signup?event=${event.id}`
     signUpBtn.target = '_blank'
     card.appendChild(signUpBtn)
     card.appendChild(
-      createEl(
+      create(
         'button',
         'accordion-toggle accordion-btn',
         `<span class="font-semibold text-sm leading-none">Show More</span>
        <i class="fa-solid fa-angle-down text-lg flex items-center justify-center leading-none transition-transform duration-300"></i>`
       )
     )
-    const accContent = createEl(
+    const accContent = create(
       'div',
       'accordion-content overflow-hidden max-h-0 transition-all duration-300'
     )
-    const linksGrid = createEl(
+    const linksGrid = create(
       'div',
       'pt-4 grid grid-cols-1 sm:grid-cols-2 gap-2'
     )
     const addLink = (href, icon, text) => {
       if (!href) return
-      const link = createEl(
+      const link = create(
         'a',
         'btn-social',
         `<i class="${icon}"></i><span>${text}</span>`
@@ -158,6 +158,7 @@ function saturate (events) {
   acc()
   getSignups()
 }
+
 fetch('/events.txt')
   .then(e => e.text())
   .then(e => {
