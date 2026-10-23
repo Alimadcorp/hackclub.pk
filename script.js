@@ -1,18 +1,19 @@
+const g = e => document.getElementById(e)
+const q = e => document.querySelectorAll(e)
+
 function acc () {
-  document.querySelectorAll('.accordion-toggle').forEach(button => {
+  q('.accordion-toggle').forEach(button => {
     button.addEventListener('click', () => {
       const content = button.nextElementSibling
       const icon = button.querySelector('svg, i')
       const isExpanded = content.style.maxHeight
 
-      document.querySelectorAll('.accordion-content').forEach(el => {
+      q('.accordion-content').forEach(el => {
         el.style.maxHeight = null
       })
-      document
-        .querySelectorAll('.accordion-toggle svg, .accordion-toggle i')
-        .forEach(el => {
-          el.style.transform = 'rotate(0deg)'
-        })
+      q('.accordion-toggle svg, .accordion-toggle i').forEach(el => {
+        el.style.transform = 'rotate(0deg)'
+      })
 
       if (!isExpanded) {
         content.style.maxHeight = content.scrollHeight + 'px'
@@ -27,7 +28,7 @@ function getSignups () {
     .then(e => e.json())
     .then(e => {
       e.events.forEach(d => {
-        const x = document.getElementById(d.slug + '-signup')
+        const x = g(d.slug + '-signup')
         if (x) {
           x.innerText =
             d.signups + '/' + Math.floor((d.signups - 1) / 100 + 1) + '00'
@@ -54,7 +55,7 @@ function create (tag, className, innerHTML = '', props = {}) {
 }
 
 function saturate (events) {
-  const container = document.querySelector('.grid')
+  const container = q('.grid')[0]
   container.innerHTML = ''
   events.forEach(event => {
     const card = create('div', 'card')
@@ -129,12 +130,19 @@ function saturate (events) {
         'ph ph-instagram-logo',
         'Instagram'
       )
-    if (event.slack)
-      addLink(
-        `https://hackclub.enterprise.slack.com/archives/${event.slack}`,
-        'ph ph-slack-logo',
-        'Slack'
+    if (event.slack) {
+      const slackUrl = `https://hackclub.enterprise.slack.com/archives/${event.slack}`
+      const link = create(
+        'a',
+        'btn-social cursor-pointer',
+        `<i class="ph ph-slack-logo"></i><span>Slack</span>`
       )
+      link.addEventListener('click', e => {
+        e.preventDefault()
+        openSlock(`haven-${event.slug}`, slackUrl)
+      })
+      linksGrid.appendChild(link)
+    }
     addLink(
       `mailto:${event.slug}@haven.hackclub.com`,
       'ph ph-envelope-simple',
@@ -196,11 +204,11 @@ let tls = tmt * 1000
 const timer = () => {
   const now = new Date()
   const tml = start - now
-  const t = 0.08
+  const t = 0.1
   tls = (1 - t) * tls + t * tml
   if (tls <= 0) {
     clearInterval(timer)
-    document.getElementById('clock').textContent = "It's started chat"
+    g('clock').textContent = "It's started chat"
     return
   }
   const days = Math.floor(tls / (1000 * 60 * 60 * 24))
@@ -209,10 +217,22 @@ const timer = () => {
   const seconds = Math.floor((tls % (1000 * 60)) / 1000)
   const pad = num => String(num).padStart(2, '0')
 
-  document.getElementById('clock').textContent = `
+  g('clock').textContent = `
     ${pad(days)}:${pad(hours)}:${pad(minutes)}:${pad(seconds)}
-  `;
-  requestAnimationFrame(timer);
+  `
+  requestAnimationFrame(timer)
+}
+timer()
+
+function openSlock (slug, channel) {
+  g('mod-h').innerText = 'Open #' + slug
+  g('si-btn').href = channel
+  g('s-modal').classList.remove('opacity-0', 'pointer-events-none')
 }
 
-timer();
+const close = () => g('s-modal').classList.add('opacity-0', 'pointer-events-none')
+
+g('close-mod')?.addEventListener('click', close)
+g('s-modal')?.addEventListener('click', e => {
+  if (e.target.id === 's-modal') close()
+})
