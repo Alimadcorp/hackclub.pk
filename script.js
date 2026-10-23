@@ -23,6 +23,9 @@ fetch('https://haven.hackclub.com/api/signups')
         const x = document.getElementById(d.slug + "-signup");
         if (x) {
             x.innerText = d.signups + "/" + Math.floor((d.signups - 1) / 100 + 1) + "00";
+            if (d.signups % 100 == 0) {
+              x.parentElement.style.color = "#ff3939";
+            }
         }
     });
   })
