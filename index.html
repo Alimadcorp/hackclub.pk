@@ -45,6 +45,29 @@
         color: black;
         background-color: white;
       }
+      a {
+        position: relative;
+      }
+      a::after {
+          content: "";
+          position: absolute;
+          top: 0; right: 0; 
+          width: 0%; height: 100%;
+          background-color: #ffffff;
+          border: 0px transparent solid;
+          border-radius: 1.25rem;
+          z-index: 1;
+          mix-blend-mode: difference;
+          transition: width 0.4s ease-in, border-radius 0.15s;
+          pointer-events: none;
+      }
+      a:hover::after {
+          transition: width 1s ease-in; 
+          left: 0; right: auto; 
+          border: 0px white solid;
+          border-radius: 0px;
+          width: 100%;
+      }
     </style>
   </head>
   <body class="bg-zinc-950 text-zinc-100 min-h-screen antialiased p-6 md:p-12">
