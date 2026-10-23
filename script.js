@@ -47,7 +47,6 @@ function createEl (tag, className, innerHTML = '', props = {}) {
   if (className) el.className = className
   if (innerHTML) el.innerHTML = innerHTML
   if (props) {
-    console.log(props)
     el.href = props.href
     el.target = props.target
   }
@@ -80,10 +79,12 @@ function saturate (events) {
         'flex items-center gap-2.5 text-gray-300 dont',
         `<i class="ph ph-map-pin flex items-center justify-center w-5"></i> 
        <span class="leading-none">${event.venue || 'Unconfirmed'}</span>`,
-        event.venueUrl ? {
-          href: 'https://' + event.venueUrl,
-          target: '_blank'
-        } : null
+        event.venueUrl
+          ? {
+              href: 'https://' + event.venueUrl,
+              target: '_blank'
+            }
+          : null
       )
     )
     card.appendChild(infoContainer)
@@ -181,3 +182,25 @@ fetch('/events.txt')
     })
     saturate(out)
   })
+
+const start = new Date("2026-11-14T10:00:00+05:00");
+
+const timer = setInterval(() => {
+  const now = new Date();
+  const timeLeftMs = start - now;
+  if (timeLeftMs <= 0) {
+    clearInterval(timer);
+    document.getElementById('clock').textContent = "It's started chat";
+    return;
+  }
+  const days = Math.floor(timeLeftMs / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeLeftMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((timeLeftMs % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeLeftMs % (1000 * 60)) / 1000);
+  const pad = (num) => String(num).padStart(2, '0');
+
+  document.getElementById('clock').textContent = `
+    ${pad(days)}:${pad(hours)}:${pad(minutes)}:${pad(seconds)}
+  `;
+}, 123);
+
