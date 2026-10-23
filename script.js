@@ -31,7 +31,7 @@ function getSignups () {
         const x = g(d.slug + '-signup')
         if (x) {
           x.innerText =
-            d.signups + '/' + Math.floor((d.signups - 1) / 100 + 1) + '00'
+            d.signups + '/' + (d.slug == 'lahore' ? 150 : Math.floor((d.signups - 1) / 100 + 1)) + '00'
           if (
             (d.signups % 100 > 90 || d.signups % 100 === 0) &&
             d.signups !== 0
