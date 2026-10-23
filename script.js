@@ -93,10 +93,10 @@ function saturate (events) {
       )
     )
     card.appendChild(infoContainer)
-    const signUpBtn = create('a', 'btn-primary', 'Sign Up Now')
-    signUpBtn.href = `https://forms.hackclub.com/haven-signup?event=${event.id}`
-    signUpBtn.target = '_blank'
-    card.appendChild(signUpBtn)
+    const sub = create('a', 'btn-primary', 'Sign Up Now')
+    sub.href = `https://forms.hackclub.com/haven-signup?event=${event.id}`
+    sub.target = '_blank'
+    card.appendChild(sub)
     card.appendChild(
       create(
         'button',
@@ -109,7 +109,7 @@ function saturate (events) {
       'div',
       'accordion-content overflow-hidden max-h-0 transition-all duration-300'
     )
-    const linksGrid = create(
+    const lg = create(
       'div',
       'pt-4 grid grid-cols-1 sm:grid-cols-2 gap-2'
     )
@@ -121,7 +121,7 @@ function saturate (events) {
         `<i class="${icon}"></i><span>${text}</span>`
       )
       link.href = href
-      linksGrid.appendChild(link)
+      lg.appendChild(link)
     }
     addLink(`https://haven.hackclub.com/${event.slug}`, 'ph ph-globe', 'Page')
     if (event.insta)
@@ -141,7 +141,7 @@ function saturate (events) {
         e.preventDefault()
         openSlock(`haven-${event.slug}`, slackUrl)
       })
-      linksGrid.appendChild(link)
+      lg.appendChild(link)
     }
     addLink(
       `mailto:${event.slug}@haven.hackclub.com`,
@@ -159,7 +159,7 @@ function saturate (events) {
         )
       }
     }
-    accContent.appendChild(linksGrid)
+    accContent.appendChild(lg)
     card.appendChild(accContent)
     container.appendChild(card)
   })
