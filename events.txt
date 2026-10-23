@@ -1,0 +1,49 @@
+format:
+slug, venue, id, insta-id, slack-channel-id, whatsapp, extra=url
+, for nothing
+write below this hashtag
+#
+
+islamabad,
+,
+recjkNQ5LBfwfGg3i,
+haven.isb.hackclub,
+C0BPVR0EVMY
+;
+
+lahore,
+COLABS NATSP,
+recvZSgonjXCIcFSA,
+haven.lhr,
+C0BRVGWHLA1,
+923124503700,
+Organize=https://alimad.fillout.com/haven-org
+;
+
+peshawar,
+,
+recHvvpPOom2zTNXL,
+haven.peshawar.hackclub,
+C0BTP85CVBJ
+;
+
+karachi,
+,
+rec2xCDW78z5uYYYj,
+haven.karachii.hackclub,
+C0BRVAD1206
+;
+
+bahawalpur,
+,
+recZFy6AeLmeY2yjm,
+haven.bwp.hackclub,
+C0C16CVLNNM
+;
+
+mirpurkhas,
+,
+reckNKin9u20dMVD5,
+haven.mirpurkhas.hackclub,
+C0C26S81LG0
+;
