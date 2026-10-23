@@ -111,7 +111,7 @@ function saturate (events) {
     addLink(
       `https://haven.hackclub.com/${event.slug}`,
       'ph ph-globe',
-      'Event page'
+      'Page'
     )
     if (event.insta)
       addLink(
@@ -134,7 +134,7 @@ function saturate (events) {
       addLink(`https://wa.me/${event.wa}`, 'ph ph-whatsapp-logo', 'WhatsApp')
     if (event.custom) {
       for (const [key, value] of Object.entries(event.custom)) {
-        addLink(value, 'ph ph-clipboard', key)
+        addLink(value, 'ph ph-' + (key == "Organize" ? 'clipboard' : 'info'), key)
       }
     }
     accContent.appendChild(linksGrid)
@@ -169,6 +169,6 @@ fetch('/events.txt')
       }
       out.push(j)
     })
-
+    console.log(out)
     saturate(out)
   })

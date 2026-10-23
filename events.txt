@@ -1,5 +1,5 @@
 format:
-slug, venue, id, insta-id, slack-channel-id, whatsapp, extra=url
+slug, venue, id, insta-id, slack-channel-id, whatsapp, Extra1=url, Extra2=url
 , for nothing
 write below this hashtag
 #
