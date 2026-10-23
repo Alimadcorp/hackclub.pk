@@ -4,6 +4,8 @@
 
 Deployed at https://haven.dino.icu
 
+Soon will also be deployed at https://hackclub.pk
+
 ### To self host:
 
 1. Clone the repo
