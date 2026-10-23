@@ -32,10 +32,10 @@ function getSignups () {
         if (x) {
           let lim =
             d.slug == 'lahore'
-              ? 1.5
+              ? 150
               : Math.floor((d.signups - 1) / 100 + 1) * 100
           x.innerText = d.signups + '/' + lim
-          if (d.signups / d.lim > 0.9) {
+          if (d.signups / lim > 0.9) {
             x.parentElement.style.color = '#ff3939' // make red when abt to fill
           }
         }
