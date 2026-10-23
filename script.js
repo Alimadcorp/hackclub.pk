@@ -30,12 +30,12 @@ function getSignups () {
       e.events.forEach(d => {
         const x = g(d.slug + '-signup')
         if (x) {
-          x.innerText =
-            d.signups + '/' + (d.slug == 'lahore' ? 150 : Math.floor((d.signups - 1) / 100 + 1)) + '00'
-          if (
-            (d.signups % 100 > 90 || d.signups % 100 === 0) &&
-            d.signups !== 0
-          ) {
+          let lim =
+            d.slug == 'lahore'
+              ? 1.5
+              : Math.floor((d.signups - 1) / 100 + 1) * 100
+          x.innerText = d.signups + '/' + lim
+          if (d.signups / d.lim > 0.9) {
             x.parentElement.style.color = '#ff3939' // make red when abt to fill
           }
         }
@@ -109,10 +109,7 @@ function saturate (events) {
       'div',
       'accordion-content overflow-hidden max-h-0 transition-all duration-300'
     )
-    const lg = create(
-      'div',
-      'pt-4 grid grid-cols-1 sm:grid-cols-2 gap-2'
-    )
+    const lg = create('div', 'pt-4 grid grid-cols-1 sm:grid-cols-2 gap-2')
     const addLink = (href, icon, text) => {
       if (!href) return
       const link = create(
