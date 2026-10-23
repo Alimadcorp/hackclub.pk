@@ -156,19 +156,19 @@ fetch('/events.txt')
       j.slug = s[0].trim()
       j.name = j.slug.charAt(0).toUpperCase() + j.slug.slice(1)
       j.venue = s[1]?.trim()
-      j.id = s[2]?.trim()
-      j.insta = s[3]?.trim()
-      j.slack = s[4]?.trim()
-      j.wa = s[5]?.trim()
+      j.venueUrl = s[2]?.trim()
+      j.id = s[3]?.trim()
+      j.insta = s[4]?.trim()
+      j.slack = s[5]?.trim()
+      j.wa = s[6]?.trim()
       j.custom = {}
 
-      for (let i = 6; i < s.length; i++) {
+      for (let i = 7; i < s.length; i++) {
         if (!s[i].trim()) continue
         const k = s[i].split('=')
         if (k.length === 2) j.custom[k[0].trim()] = k[1].trim()
       }
       out.push(j)
     })
-    console.log(out)
     saturate(out)
   })
