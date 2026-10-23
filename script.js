@@ -230,9 +230,16 @@ function openSlock (slug, channel) {
   g('s-modal').classList.remove('opacity-0', 'pointer-events-none')
 }
 
-const close = () => g('s-modal').classList.add('opacity-0', 'pointer-events-none')
+const close = () =>
+  g('s-modal').classList.add('opacity-0', 'pointer-events-none')
 
 g('close-mod')?.addEventListener('click', close)
 g('s-modal')?.addEventListener('click', e => {
   if (e.target.id === 's-modal') close()
 })
+
+setInterval(() => {
+  fetch('https://live.alimad.co/ping?app=havens-pk')
+    .then(e => e.text())
+    .then(d => (g('spec').textContent = d))
+}, 20000)
