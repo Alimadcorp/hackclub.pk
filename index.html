@@ -47,19 +47,19 @@
     <style type="text/tailwindcss">
       @layer components {
         .card {
-          @apply bg-[#E87136] border-2 border-[#783D2B] rounded-2xl p-6 flex flex-col;
+          @apply bg-[#783D2B] border-2 border-[#783D2B] rounded-2xl p-6 flex flex-col;
         }
         .btn-primary {
-          @apply w-full h-10 bg-[#783D2B] text-[#F9DD60] font-bold flex items-center justify-center gap-2 rounded-full transition-colors mb-4 border-transparent border-2 rounded-[1.25rem] hover:rounded-[0px] transition-all hover:border-2 hover:border-[#783D2B];
+          @apply w-full h-10 bg-[#F9DD60] text-[#783D2B] font-bold flex items-center justify-center gap-2 mb-4 border-2 border-transparent rounded-[1.25rem] transition-all hover:rounded-[0px] hover:bg-[#FC8616] hover:text-[#FFF4E0];
         }
         .btn-social {
-          @apply flex items-center justify-center gap-2 text-center bg-[#DFA063] text-[#FFF4E0] text-sm font-semibold h-10 px-3 rounded-[1.25rem] border-transparent border-2 hover:rounded-[0px] transition-all hover:border-2 hover:border-[#783D2B];
+          @apply flex items-center justify-center gap-2 text-center bg-[#DFA063] text-[#783D2B] text-sm font-semibold h-10 px-3 rounded-[1.25rem] border-transparent border-2 hover:rounded-[0px] transition-all hover:bg-[#F9DD60];
         }
         .btn-social span {
           @apply flex items-center h-full;
         }
         .accordion-btn {
-          @apply flex justify-between items-center w-full py-2 text-zinc-400 hover:text-[#FFF4E0] transition-colors;
+          @apply flex justify-between items-center w-full py-2 text-[#FFF4E0] hover:text-[#F9DD60] transition-colors;
         }
         .ph {
           @apply text-2xl;
@@ -67,13 +67,13 @@
         ::selection {
           @apply text-black bg-white;
         }
-        a:not(.dont) {
+        a:not(.dont):not(.btn-primary):not(.btn-social) {
           @apply relative overflow-hidden;
         }
-        a:not(.dont)::after {
+        a:not(.dont):not(.btn-primary):not(.btn-social)::after {
           @apply content-[''] absolute top-0 right-0 w-0 h-full bg-white border-0 border-transparent rounded-[1.25rem] z-[4] mix-blend-difference transition-[width,border-radius] ease-in pointer-events-none;
         }
-        a:not(.dont):hover::after {
+        a:not(.dont):not(.btn-primary):not(.btn-social):hover::after {
           @apply left-0 right-auto border-0 border-white rounded-none w-full transition-[width] ease-in;
         }
       }
@@ -82,7 +82,7 @@
       }
     </style>
   </head>
-  <body class="bg-[#F9DD60] text-[#783D2B] min-h-screen antialiased p-6 md:p-12">
+  <body class="bg-[#DFA063] text-[#783D2B] bg-[url('https://www.transparenttextures.com/patterns/asfalt-dark.png')] min-h-screen antialiased p-6 md:p-12">
     <a href="https://hackclub.com" class="dont hover:rotate-[5deg] hover:translate-y-3 transition-transform fixed z-[50] left-[-5px] top-0" target="_blank">
       <img src="flag.png" class="w-36 md:w-48">
     </a>
@@ -113,8 +113,8 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </div>
     <div id="s-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 md:backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-200">
-      <div class="card max-w-[90vw] w-md mx-4 p-6 relative border-zinc-800">
-        <button id="close-mod" class="absolute top-2 right-2 text-zinc-400 hover:text-[#783D2B] transition-colors">
+      <div class="card max-w-[90vw] w-md mx-4 p-6 relative border-[#783D2B]">
+        <button id="close-mod" class="absolute top-2 right-2 text-[#DFA063] hover:text-[#783D2B] transition-colors">
           <i class="ph ph-x"></i>
         </button>
         <h3 id="mod-h" class="text-xl font-bold text-[#783D2B] mb-6 pr-6"></h3>

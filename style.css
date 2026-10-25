@@ -11,3 +11,17 @@
   background: transparent;
   cursor: default;
 }
+
+.card-karachi {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('cities/Mazar-e-Quaid.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.card-islamabad {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('cities/isb.jpg');
+  background-size: cover;
+  background-position: center;
+}

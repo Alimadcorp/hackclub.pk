@@ -36,7 +36,7 @@ function getSignups () {
               : Math.floor((d.signups - 1) / 100 + 1) * 100
           x.innerText = d.signups + '/' + lim
           if (d.signups / lim > 0.9) {
-            x.parentElement.style.color = '#ff3939' // make red when abt to fill
+            x.parentElement.style.color = '#FC8616' 
           }
         }
       })
@@ -59,8 +59,9 @@ function saturate (events) {
   container.innerHTML = ''
   events.forEach(event => {
     const card = create('div', 'card')
+    card.classList.add('card-' + event.slug) 
     card.appendChild(
-      create('h2', 'text-2xl font-bold text-[#783D2B] mb-3', event.name)
+      create('h2', 'text-2xl font-bold text-[#FFF4E0] mb-3', event.name)
     )
     const infoContainer = create(
       'div',
@@ -69,7 +70,7 @@ function saturate (events) {
     infoContainer.appendChild(
       create(
         'a',
-        'flex items-center gap-2.5 text-gray-300 dont',
+        'flex items-center gap-2.5 text-[#F9DD60] dont',
         `<i class="ph ph-users flex items-center justify-center w-5"></i> 
        <span class="leading-none" id="${event.slug}-signup">0/100</span>`,
         {
@@ -81,7 +82,7 @@ function saturate (events) {
     infoContainer.appendChild(
       create(
         event.venueUrl ? 'a' : 'div',
-        'flex items-center gap-2.5 text-gray-300 dont',
+        'flex items-center gap-2.5 text-[#F9DD60] dont',
         `<i class="ph ph-map-pin flex items-center justify-center w-5"></i> 
        <span class="leading-none">${event.venue || 'Unconfirmed'}</span>`,
         event.venueUrl
@@ -264,7 +265,7 @@ L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_M
 let pkBounds;
 const fit = () => {
   map.invalidateSize();
-  map.fitBounds(pkBounds, { padding: [30, 30], animate: false });
+  map.fitBounds(pkBounds, { padding: [10, 10], animate: false });
 };
 
 fetch("pakistan.geojson")
@@ -283,7 +284,7 @@ fetch("pakistan.geojson")
 
     L.polygon([world, ...holes], {
       stroke: false,
-      fillColor: "#F9DD60",
+      fillColor: "#DFA063",
       fillOpacity: 1,
       interactive: false,
     }).addTo(map);
