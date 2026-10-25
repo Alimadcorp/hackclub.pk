@@ -258,14 +258,9 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
 }).addTo(map);
 
-fetch("https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson")
+fetch("pakistan.geojson")
   .then((response) => response.json())
-  .then((data) => {
-    const pakistan = data.features.find(
-      (feature) => feature.properties.name === "Pakistan"
-    );
-
-    if (!pakistan) return;
+  .then((pakistan) => {
 
     const polys =
       pakistan.geometry.type === "Polygon"
@@ -306,6 +301,9 @@ fetch("https://raw.githubusercontent.com/datasets/geo-countries/master/data/coun
     });
     map.setMaxBounds(border.getBounds().pad(0.1));
     map.setMinZoom(map.getZoom());
+    document.getElementById("pakistan-map").classList.add("ready");
+  })
+  .catch(() => {
     document.getElementById("pakistan-map").classList.add("ready");
   });
 
