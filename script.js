@@ -60,7 +60,7 @@ function saturate (events) {
   events.forEach(event => {
     const card = create('div', 'card')
     card.appendChild(
-      create('h2', 'text-2xl font-bold text-white mb-3', event.name)
+      create('h2', 'text-2xl font-bold text-[#783D2B] mb-3', event.name)
     )
     const infoContainer = create(
       'div',
@@ -283,7 +283,7 @@ fetch("pakistan.geojson")
 
     L.polygon([world, ...holes], {
       stroke: false,
-      fillColor: "#09090b",
+      fillColor: "#F9DD60",
       fillOpacity: 1,
       interactive: false,
     }).addTo(map);
@@ -291,7 +291,7 @@ fetch("pakistan.geojson")
     const border = L.geoJSON(pakistan, {
       interactive: false, // so clicks reach the dots
       style: {
-        color: "#F9DD60",
+        color: "#783D2B",
         weight: 2,
         opacity: 1,
         fillColor: "#E87136",
