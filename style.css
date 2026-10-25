@@ -25,3 +25,31 @@
   background-size: cover;
   background-position: center;
 }
+
+.card-lahore {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('cities/Lahore-Museum-Pakistan.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+.card-peshawar {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('cities/peshawar.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.card-mirpurkhas {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('cities/mirpurkhas.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.card-bahawalpur {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('cities/bahawalpur.jpg');
+  background-size: cover;
+  background-position: center;
+}
