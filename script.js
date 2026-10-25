@@ -241,8 +241,55 @@ setInterval(() => {
     .then(d => (g('spec').textContent = d))
 }, 20000)
 
-const map = L.map("pakistan-map").setView([30.3753, 69.3451], 5);
+const map = L.map("pakistan-map", {
+  zoomControl: false,
+  scrollWheelZoom: false,
+  attributionControl: false,
+});
 
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  attribution: "&copy; OpenStreetMap contributors",
-}).addTo(map);
+map.setView([30.3753, 69.3451], 5);
+
+fetch("https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson")
+.then((response) => response.json())
+.then((data) => {
+  const pakistan = data.features.find(
+    (feature) => feature.properties.name === "Pakistan"
+  );
+
+  if (!pakistan) return;
+
+    const border = L.geoJSON(pakistan, {
+      style: {
+      color: "#F9DD60",
+      weight: 2,
+      opacity: 1,
+      fillColor: "#774c36",
+      fillOpacity: 0.25,
+    }
+    }).addTo(map);
+
+    map.fitBounds(border.getBounds(), {
+      padding: [20, 20],
+    });
+});
+
+const cities = [
+  { name: "karachi", coords: [24.8607, 67.0011] },
+  { name: "lahore", coords: [31.5204, 74.3587] },
+  { name: "islamabad", coords: [33.6844, 73.0479] },
+  { name: "peshawar", coords: [34.0151, 71.5249] },
+  { name: "bahawalpur", coords: [29.3956, 71.6836] },
+  { name: "mirpurkhas", coords: [25.5269, 69.0111] },
+];
+
+cities.forEach((city) => {
+  L.circleMarker(city.coords, {
+    radius: 5,
+    color: "#783D2B",
+    weight: 2,
+    fillColor: "#F9DD60",
+    fillOpacity: 1,
+  })
+    .addTo(map)
+    .bindPopup(city.name);
+});
