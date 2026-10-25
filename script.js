@@ -240,3 +240,9 @@ setInterval(() => {
     .then(e => e.text())
     .then(d => (g('spec').textContent = d))
 }, 20000)
+
+const map = L.map("pakistan-map").setView([30.3753, 69.3451], 5);
+
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: "&copy; OpenStreetMap contributors",
+}).addTo(map);
