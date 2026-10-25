@@ -6,3 +6,8 @@
 #pakistan-map.ready {
   opacity: 1;
 }
+
+.leaflet-container {
+  background: transparent;
+  cursor: default;
+}

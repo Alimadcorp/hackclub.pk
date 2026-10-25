@@ -244,24 +244,32 @@ setInterval(() => {
 const map = L.map("pakistan-map", {
   zoomControl: false,
   scrollWheelZoom: false,
-  attributionControl: false,
-  dragging: false,
-  touchZoom: false,
   doubleClickZoom: false,
+  touchZoom: false,
   boxZoom: false,
   keyboard: false,
+  dragging: false,
+  attributionControl: false,
+  zoomSnap: 0,
 });
 
 map.setView([30.3753, 69.3451], 5);
+map.createPane("cities");
+map.getPane("cities").style.zIndex = 650;
 
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", {
   maxZoom: 19,
 }).addTo(map);
+
+let pkBounds;
+const fit = () => {
+  map.invalidateSize();
+  map.fitBounds(pkBounds, { padding: [30, 30], animate: false });
+};
 
 fetch("pakistan.geojson")
   .then((response) => response.json())
   .then((pakistan) => {
-
     const polys =
       pakistan.geometry.type === "Polygon"
         ? [pakistan.geometry.coordinates]
@@ -271,12 +279,7 @@ fetch("pakistan.geojson")
       poly[0].map(([lng, lat]) => [lat, lng])
     );
 
-    const world = [
-      [-85, -180],
-      [-85, 180],
-      [85, 180],
-      [85, -180],
-    ];
+    const world = [[-85, -180], [-85, 180], [85, 180], [85, -180]];
 
     L.polygon([world, ...holes], {
       stroke: false,
@@ -286,6 +289,7 @@ fetch("pakistan.geojson")
     }).addTo(map);
 
     const border = L.geoJSON(pakistan, {
+      interactive: false, // so clicks reach the dots
       style: {
         color: "#F9DD60",
         weight: 2,
@@ -295,12 +299,9 @@ fetch("pakistan.geojson")
       },
     }).addTo(map);
 
-    map.fitBounds(border.getBounds(), {
-      padding: [20, 20],
-      animate: false,
-    });
-    map.setMaxBounds(border.getBounds().pad(0.1));
-    map.setMinZoom(map.getZoom());
+    pkBounds = border.getBounds();
+    fit();
+    window.addEventListener("resize", fit);
     document.getElementById("pakistan-map").classList.add("ready");
   })
   .catch(() => {
@@ -308,22 +309,26 @@ fetch("pakistan.geojson")
   });
 
 const cities = [
-  { name: "karachi", coords: [24.8607, 67.0011] },
-  { name: "lahore", coords: [31.5204, 74.3587] },
-  { name: "islamabad", coords: [33.6844, 73.0479] },
-  { name: "peshawar", coords: [34.0151, 71.5249] },
-  { name: "bahawalpur", coords: [29.3956, 71.6836] },
-  { name: "mirpurkhas", coords: [25.5269, 69.0111] },
+  { name: "Karachi", slug: "karachi", coords: [24.8607, 67.0011] },
+  { name: "Lahore", slug: "lahore", coords: [31.5204, 74.3587] },
+  { name: "Islamabad", slug: "islamabad", coords: [33.6844, 73.0479] },
+  { name: "Peshawar", slug: "peshawar", coords: [34.0151, 71.5249] },
+  { name: "Bahawalpur", slug: "bahawalpur", coords: [29.3956, 71.6836] },
+  { name: "Mirpurkhas", slug: "mirpurkhas", coords: [25.5269, 69.0111] },
 ];
 
 cities.forEach((city) => {
   L.circleMarker(city.coords, {
-    radius: 5,
+    pane: "cities",
+    radius: 7,
     color: "#783D2B",
     weight: 2,
     fillColor: "#F9DD60",
     fillOpacity: 1,
   })
     .addTo(map)
-    .bindPopup(city.name);
+    .bindPopup(
+      `<b>${city.name}</b><br><a href="https://haven.hackclub.com/${city.slug}" target="_blank">Open event page →</a>`,
+      { autoPan: false }
+    );
 });

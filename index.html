@@ -87,26 +87,27 @@
       <img src="flag.png" class="w-36 md:w-48">
     </a>
     <div class="max-w-7xl mx-auto mt-16 md:mt-8">
-      <header class="mb-12 text-center">
-        <h1
-          class="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4"
-        >
-          Haven Events in Pakistan
-        </h1>
-        <p class="text-zinc-400 text-sm md:text-lg max-w-2xl mx-auto mb-4">
-          Join the world's largest student-led game jam. Find your city, sign up
-          for free, and get ready to cook.
-        </p>
-        <div class="map">
-          <div id="pakistan-map" class="w-full h-[400px] rounded-2xl"></div>
-        </div>
-        <div class="p-2 flex items-center justify-between flex-col w-full">
-          <p class="text-zinc-500 max-w-2xl md:text-md text-sm mb-0">Starting in</p>
-          <h2 class="text-4xl md:text-8xl font-mono md:mt-[-10px]" id="clock" title="Sat 14 November, 2026 at 10 AM">31:01:01:00</h2>
-          <p class="text-md text-zinc-500 flex items-center gap-1">
-            <i class="ph ph-eye text-[20px] translate-y-[0.5px]"></i>
-            <span id="spec">1</span>
+      <header class="mb-12 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+        <div class="md:w-1/2 text-center md:text-left">
+          <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
+            Haven Events in Pakistan
+          </h1>
+          <p class="text-zinc-400 text-sm md:text-lg max-w-2xl mx-auto md:mx-0 mb-4">
+            Join the world's largest student-led game jam. Find your city, sign up
+            for free, and get ready to cook.
           </p>
+          <div class="p-2 flex items-center md:items-start justify-between flex-col w-full">
+            <p class="text-zinc-500 max-w-2xl md:text-md text-sm mb-0">Starting in</p>
+            <h2 class="text-4xl md:text-8xl font-mono md:mt-[-10px]" id="clock" title="Sat 14 November, 2026 at 10 AM">31:01:01:00</h2>
+            <p class="text-md text-zinc-500 flex items-center gap-1">
+              <i class="ph ph-eye text-[20px] translate-y-[0.5px]"></i>
+              <span id="spec">1</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="md:w-1/2">
+          <div id="pakistan-map" class="w-full h-[400px] md:h-[550px]"></div>
         </div>
       </header>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
