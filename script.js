@@ -245,33 +245,69 @@ const map = L.map("pakistan-map", {
   zoomControl: false,
   scrollWheelZoom: false,
   attributionControl: false,
+  dragging: false,
+  touchZoom: false,
+  doubleClickZoom: false,
+  boxZoom: false,
+  keyboard: false,
 });
 
 map.setView([30.3753, 69.3451], 5);
 
-fetch("https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson")
-.then((response) => response.json())
-.then((data) => {
-  const pakistan = data.features.find(
-    (feature) => feature.properties.name === "Pakistan"
-  );
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19,
+}).addTo(map);
 
-  if (!pakistan) return;
+fetch("https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson")
+  .then((response) => response.json())
+  .then((data) => {
+    const pakistan = data.features.find(
+      (feature) => feature.properties.name === "Pakistan"
+    );
+
+    if (!pakistan) return;
+
+    const polys =
+      pakistan.geometry.type === "Polygon"
+        ? [pakistan.geometry.coordinates]
+        : pakistan.geometry.coordinates;
+
+    const holes = polys.map((poly) =>
+      poly[0].map(([lng, lat]) => [lat, lng])
+    );
+
+    const world = [
+      [-85, -180],
+      [-85, 180],
+      [85, 180],
+      [85, -180],
+    ];
+
+    L.polygon([world, ...holes], {
+      stroke: false,
+      fillColor: "#09090b",
+      fillOpacity: 1,
+      interactive: false,
+    }).addTo(map);
 
     const border = L.geoJSON(pakistan, {
       style: {
-      color: "#F9DD60",
-      weight: 2,
-      opacity: 1,
-      fillColor: "#774c36",
-      fillOpacity: 0.25,
-    }
+        color: "#F9DD60",
+        weight: 2,
+        opacity: 1,
+        fillColor: "#E87136",
+        fillOpacity: 0.25,
+      },
     }).addTo(map);
 
     map.fitBounds(border.getBounds(), {
       padding: [20, 20],
+      animate: false,
     });
-});
+    map.setMaxBounds(border.getBounds().pad(0.1));
+    map.setMinZoom(map.getZoom());
+    document.getElementById("pakistan-map").classList.add("ready");
+  });
 
 const cities = [
   { name: "karachi", coords: [24.8607, 67.0011] },
