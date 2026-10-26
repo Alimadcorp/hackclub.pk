@@ -2,9 +2,7 @@
 
 ### A website that lists all Haven events in Pakistan.
 
-Deployed at https://haven.dino.icu
-
-Soon will also be deployed at https://hackclub.pk
+Deployed at https://hackclub.pk
 
 ### To self host:
 
