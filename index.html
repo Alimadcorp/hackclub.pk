@@ -82,16 +82,21 @@
       }
     </style>
   </head>
-  <body class="bg-[#DFA063] text-[#783D2B] bg-[url('https://www.transparenttextures.com/patterns/asfalt-dark.png')] min-h-screen antialiased p-6 md:p-12">
+  <body class="bg-[#DFA063] text-[#783D2B]  min-h-screen antialiased p-6 md:p-12">
     <a href="https://hackclub.com" class="dont hover:rotate-[5deg] hover:translate-y-3 transition-transform fixed z-[50] left-[-5px] top-0" target="_blank">
       <img src="flag.png" class="w-36 md:w-48">
     </a>
     <div class="max-w-7xl mx-auto mt-16 md:mt-8">
       <header class="mb-12 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
         <div class="md:w-1/2 text-center md:text-left">
-          <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-[#783D2B] mb-4">
-            Haven Events in Pakistan
-          </h1>
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-[#783D2B] mb-4">
+          Haven Events in
+          <span class="whitespace-nowrap">
+            <span class="pk-flag">Pakistan</span><a href="https://haven.hackclub.com" class="dont inline-block align-middle hover:scale-110 transition-transform" target="_blank">
+              <img src="haven-logo-white.png" class="inline-block h-[1.2em] align-middle ml-2" alt="Haven">
+            </a>
+          </span>
+        </h1>
           <p class="text-[#783D2B] text-sm md:text-lg max-w-2xl mx-auto md:mx-0 mb-4">
             Join the world's largest student-led game jam. Find your city, sign up
             for free, and get ready to cook.
@@ -107,11 +112,12 @@
         </div>
 
         <div class="md:w-1/2">
-          <div id="pakistan-map" class="w-full h-[400px] md:h-[550px]"></div>
+          <div id="pakistan-map" class="w-full h-[400px] md:h-[550px] isolate rounded-2xl"></div>
         </div>
       </header>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start"></div>
     </div>
+    
     <div id="s-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 md:backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-200">
       <div class="card max-w-[90vw] w-md mx-4 p-6 relative border-[#783D2B]">
         <button id="close-mod" class="absolute top-2 right-2 text-[#DFA063] hover:text-[#783D2B] transition-colors">

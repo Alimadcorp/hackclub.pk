@@ -53,3 +53,14 @@
   background-size: cover;
   background-position: center;
 }
+
+.pk-flag {
+  background-image: url('cities/pk-flag.webp');
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px #783D2B;
+}
