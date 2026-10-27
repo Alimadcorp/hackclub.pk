@@ -36,7 +36,7 @@ function getSignups () {
               : Math.floor((d.signups - 1) / 100 + 1) * 100
           x.innerText = d.signups + '/' + lim
           if (d.signups / lim > 0.9) {
-            x.parentElement.style.color = '#ff3939' // make red when abt to fill
+            x.parentElement.style.color = '#FC8616' 
           }
         }
       })
@@ -59,8 +59,9 @@ function saturate (events) {
   container.innerHTML = ''
   events.forEach(event => {
     const card = create('div', 'card')
+    card.classList.add('card-' + event.slug) 
     card.appendChild(
-      create('h2', 'text-2xl font-bold text-white mb-3', event.name)
+      create('h2', 'text-2xl font-bold text-[#FFF4E0] mb-3', event.name)
     )
     const infoContainer = create(
       'div',
@@ -69,7 +70,7 @@ function saturate (events) {
     infoContainer.appendChild(
       create(
         'a',
-        'flex items-center gap-2.5 text-gray-300 dont',
+        'flex items-center gap-2.5 text-[#F9DD60] dont',
         `<i class="ph ph-users flex items-center justify-center w-5"></i> 
        <span class="leading-none" id="${event.slug}-signup">0/100</span>`,
         {
@@ -81,7 +82,7 @@ function saturate (events) {
     infoContainer.appendChild(
       create(
         event.venueUrl ? 'a' : 'div',
-        'flex items-center gap-2.5 text-gray-300 dont',
+        'flex items-center gap-2.5 text-[#F9DD60] dont',
         `<i class="ph ph-map-pin flex items-center justify-center w-5"></i> 
        <span class="leading-none">${event.venue || 'Unconfirmed'}</span>`,
         event.venueUrl
@@ -240,3 +241,95 @@ setInterval(() => {
     .then(e => e.text())
     .then(d => (g('spec').textContent = d))
 }, 20000)
+
+const map = L.map("pakistan-map", {
+  zoomControl: false,
+  scrollWheelZoom: false,
+  doubleClickZoom: false,
+  touchZoom: false,
+  boxZoom: false,
+  keyboard: false,
+  dragging: false,
+  attributionControl: false,
+  zoomSnap: 0,
+});
+
+map.setView([30.3753, 69.3451], 5);
+map.createPane("cities");
+map.getPane("cities").style.zIndex = 650;
+
+L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", {
+  maxZoom: 19,
+}).addTo(map);
+
+let pkBounds;
+const fit = () => {
+  map.invalidateSize();
+  map.fitBounds(pkBounds, { padding: [10, 10], animate: false });
+};
+
+fetch("pakistan.geojson")
+  .then((response) => response.json())
+  .then((pakistan) => {
+    const polys =
+      pakistan.geometry.type === "Polygon"
+        ? [pakistan.geometry.coordinates]
+        : pakistan.geometry.coordinates;
+
+    const holes = polys.map((poly) =>
+      poly[0].map(([lng, lat]) => [lat, lng])
+    );
+
+    const world = [[-85, -180], [-85, 180], [85, 180], [85, -180]];
+
+    L.polygon([world, ...holes], {
+      stroke: false,
+      fillColor: "#DFA063",
+      fillOpacity: 1,
+      interactive: false,
+    }).addTo(map);
+
+    const border = L.geoJSON(pakistan, {
+      interactive: false, // so clicks reach the dots
+      style: {
+        color: "#783D2B",
+        weight: 2,
+        opacity: 1,
+        fillColor: "#E87136",
+        fillOpacity: 0.25,
+      },
+    }).addTo(map);
+
+    pkBounds = border.getBounds();
+    fit();
+    window.addEventListener("resize", fit);
+    document.getElementById("pakistan-map").classList.add("ready");
+  })
+  .catch(() => {
+    document.getElementById("pakistan-map").classList.add("ready");
+  });
+
+const cities = [
+  { name: "Karachi", slug: "karachi", coords: [24.8607, 67.0011] },
+  { name: "Lahore", slug: "lahore", coords: [31.5204, 74.3587] },
+  { name: "Islamabad", slug: "islamabad", coords: [33.6844, 73.0479] },
+  { name: "Peshawar", slug: "peshawar", coords: [34.0151, 71.5249] },
+  { name: "Bahawalpur", slug: "bahawalpur", coords: [29.3956, 71.6836] },
+  { name: "Mirpurkhas", slug: "mirpurkhas", coords: [25.5269, 69.0111] },
+];
+
+cities.forEach((city) => {
+  L.circleMarker(city.coords, {
+    pane: "cities",
+    radius: 7,
+    color: "#783D2B",
+    weight: 2,
+    fillColor: "#F9DD60",
+    fillOpacity: 1,
+  })
+    .addTo(map)
+    .bindPopup(
+      `<b>${city.name}</b><br><a href="https://haven.hackclub.com/${city.slug}" target="_blank">Open event page →</a>`,
+      { autoPan: false }
+    );
+});
