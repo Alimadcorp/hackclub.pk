@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preload" href="pakistan.geojson" as="fetch" crossorigin>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-    <link rel="stylesheet" href="style.css">
     <title>Haven Events in Pakistan</title>
     <meta
       name="description"
@@ -79,6 +78,72 @@
       }
       .btn-primary, .btn-social, .accordion-btn {
         -webkit-tap-highlight-color: transparent;
+      }
+      #pakistan-map {
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      #pakistan-map.ready {
+        opacity: 1;
+      }
+
+      .leaflet-container {
+        background: transparent;
+        cursor: default;
+      }
+
+      .card-karachi {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url('cities/Mazar-e-Quaid.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+
+      .card-islamabad {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url('cities/isb.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+
+      .card-lahore {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url('cities/Lahore-Museum-Pakistan.webp');
+        background-size: cover;
+        background-position: center;
+      }
+
+      .card-peshawar {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url('cities/peshawar.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+
+      .card-mirpurkhas {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url('cities/mirpurkhas.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+
+      .card-bahawalpur {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url('cities/bahawalpur.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+
+      .pk-flag {
+        background-image: url('cities/pk-flag.webp');
+        background-size: cover;
+        background-position: center;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+        -webkit-text-stroke: 1px #783D2B;
       }
     </style>
   </head>
