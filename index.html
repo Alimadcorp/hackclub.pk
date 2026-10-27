@@ -82,8 +82,14 @@
         .pk-flag {
           @apply bg-[url('cities/pk-flag.webp')] bg-cover bg-center bg-clip-text text-transparent;
         }
-        .leaflet-popup-tip, .leaflet-popup-content-wrapper, .leaflet-popup-content {
+        .leaflet-popup-content-wrapper, .leaflet-popup-content {
           @apply bg-[#F9DD60] text-[#783D2B] font-['Ubuntu',sans-serif];
+        }
+        .leaflet-popup-content-wrapper {
+          @apply border-2 border-[#783D2B];
+        }
+        .leaflet-popup-tip {
+          @apply bg-[#783D2B];
         }
       }
       .btn-primary,
