@@ -75,22 +75,18 @@
         a:not(.dont):not(.btn-primary):not(.btn-social):hover::after {
           @apply left-0 right-auto border-0 border-white rounded-none w-full transition-[width] ease-in;
         }
+        #pakistan-map {
+          @apply opacity-0 transition-all;
+        }
+        #pakistan-map.ready {
+          @apply opacity-1
+        }
+        .leaflet-container {
+          @apply bg-transparent cursor-default;
+        }
       }
       .btn-primary, .btn-social, .accordion-btn {
         -webkit-tap-highlight-color: transparent;
-      }
-      #pakistan-map {
-        opacity: 0;
-        transition: opacity 0.4s ease;
-      }
-
-      #pakistan-map.ready {
-        opacity: 1;
-      }
-
-      .leaflet-container {
-        background: transparent;
-        cursor: default;
       }
 
       .card-karachi {
@@ -185,11 +181,11 @@
         </h2>
         <p class="md:text-xl text-[#783D2B] mb-6 text-center">yes! we've organized and attended these events in the past for free!</p>
         <div class="relative mx-auto w-full max-w-4xl md:max-w-6xl h-[520px] md:h-[640px] mt-10">
-          <img src="pastevents/sunbeam-isb.jpg" alt="sunbeam islamabad"class="absolute top-[2%] left-[31%] w-[60%] md:w-[34%] rotate-2 border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform">
-          <img src="pastevents/cflhr1.JPG" alt="campfire lahore" class="absolute top-0 left-0 w-[65%] md:w-[38%] -rotate-6 border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform">
-          <img src="pastevents/cflhr2.JPG" alt="campfire lahore" class="absolute top-[10%] right-0 w-[60%] md:w-[36%] rotate-3 border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform">
-          <img src="pastevents/arcana.jpg" alt="arcana" class="absolute top-[38%] left-[4%] md:top-[45%] md:left-[18%] w-[60%] md:w-[36%] rotate-[8deg] border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform">
-          <img src="pastevents/cflhr3.jpg" alt="" class="absolute top-[48%] right-[4%] md:top-[40%] md:right-[16%] w-[58%] md:w-[34%] -rotate-3 border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform">
+          <img src="past/sunbeam-isb.jpg" alt="sunbeam islamabad"class="absolute top-[2%] left-[31%] w-[60%] md:w-[34%] rotate-2 border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform">
+          <img src="past/cflhr1.JPG" alt="campfire lahore" class="absolute top-0 left-0 w-[65%] md:w-[38%] -rotate-6 border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform">
+          <img src="past/cflhr2.JPG" alt="campfire lahore" class="absolute top-[10%] right-0 w-[60%] md:w-[36%] rotate-3 border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform">
+          <img src="past/arcana.jpg" alt="arcana" class="absolute top-[38%] left-[4%] md:top-[45%] md:left-[18%] w-[60%] md:w-[36%] rotate-[8deg] border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform">
+          <img src="past/cflhr3.jpg" alt="" class="absolute top-[48%] right-[4%] md:top-[40%] md:right-[16%] w-[58%] md:w-[34%] -rotate-3 border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform">
         </div>
       </section>
     </div>

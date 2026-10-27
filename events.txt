@@ -13,8 +13,8 @@ C0BPVR0EVMY
 ;
 
 lahore,
-COLABS NATSP,
-maps.app.goo.gl/RwrjMTpdXSthtnPp9,
+COLABS NATSP Cantt,
+maps.app.goo.gl/isJuDMy7f1zt7PnF9,
 recvZSgonjXCIcFSA,
 haven.lhr,
 C0BRVGWHLA1,
