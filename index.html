@@ -3,8 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preload" href="pakistan.geojson" as="fetch" crossorigin>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="preload" href="pakistan.geojson" as="fetch" crossorigin />
+    <link rel="preload" href="events.txt" as="fetch" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
     <title>Haven Events in Pakistan</title>
     <meta
       name="description"
@@ -79,7 +83,7 @@
           @apply opacity-0 transition-all;
         }
         #pakistan-map.ready {
-          @apply opacity-1
+          @apply opacity-1;
         }
         .leaflet-container {
           @apply bg-transparent cursor-default;
@@ -91,33 +95,66 @@
           @apply bg-[url('cities/pk-flag.webp')] bg-cover bg-center bg-clip-text text-transparent;
         }
       }
-      .btn-primary, .btn-social, .accordion-btn {
+      .btn-primary,
+      .btn-social,
+      .accordion-btn {
         -webkit-tap-highlight-color: transparent;
       }
     </style>
   </head>
-  <body class="bg-[#DFA063] text-[#783D2B]  min-h-screen antialiased p-6 md:p-12">
-    <a href="https://hackclub.com" class="dont hover:rotate-[5deg] hover:translate-y-3 transition-transform fixed z-[50] left-[-5px] top-0" target="_blank">
-      <img src="flag.png" class="w-36 md:w-48">
+  <body
+    class="bg-[#DFA063] text-[#783D2B] min-h-screen antialiased p-6 md:p-12"
+  >
+    <a
+      href="https://hackclub.com"
+      class="dont hover:rotate-[5deg] hover:translate-y-3 transition-transform fixed z-[50] left-[-5px] top-0"
+      target="_blank"
+    >
+      <img src="flag.png" class="w-36 md:w-48" />
     </a>
     <div class="max-w-7xl mx-auto mt-16 md:mt-8">
-      <header class="mb-12 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+      <header
+        class="mb-12 flex flex-col md:flex-row md:items-center md:justify-between gap-8"
+      >
         <div class="md:w-1/2 text-center md:text-left">
-        <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-[#783D2B] mb-4">
-          Haven Events in
-          <span class="whitespace-nowrap">
-            <span class="pk-flag">Pakistan</span><a href="https://haven.hackclub.com" class="dont inline-block align-middle hover:scale-110 transition-transform" target="_blank">
-              <img src="haven.png" class="inline-block h-[1.2em] align-middle ml-2" alt="Haven">
-            </a>
-          </span>
-        </h1>
-          <p class="text-[#783D2B] text-sm md:text-lg max-w-2xl mx-auto md:mx-0 mb-4">
-            Join the world's largest student-led game jam. Find your city, sign up
-            for free, and get ready to cook.
+          <h1
+            class="text-4xl md:text-5xl font-bold tracking-tight text-[#783D2B] mb-4"
+          >
+            Haven Events in
+            <span class="whitespace-nowrap">
+              <span class="pk-flag">Pakistan</span
+              ><a
+                href="https://haven.hackclub.com"
+                class="dont inline-block align-middle hover:scale-110 transition-transform"
+                target="_blank"
+              >
+                <img
+                  src="haven.png"
+                  class="inline-block h-[1.2em] align-middle ml-2"
+                  alt="Haven"
+                />
+              </a>
+            </span>
+          </h1>
+          <p
+            class="text-[#783D2B] text-sm md:text-lg max-w-2xl mx-auto md:mx-0 mb-4"
+          >
+            Join the world's largest student-led game jam. Find your city, sign
+            up for free, and get ready to cook.
           </p>
-          <div class="p-2 flex items-center md:items-start justify-between flex-col w-full">
-            <p class="text-[#783D2B] max-w-2xl md:text-md text-sm mb-0">Starting in</p>
-            <h2 class="text-4xl md:text-8xl font-mono md:mt-[-10px]" id="clock" title="Sat 14 November, 2026 at 10 AM">31:01:01:00</h2>
+          <div
+            class="p-2 flex items-center md:items-start justify-between flex-col w-full"
+          >
+            <p class="text-[#783D2B] max-w-2xl md:text-md text-sm mb-0">
+              Starting in
+            </p>
+            <h2
+              class="text-4xl md:text-8xl font-mono md:mt-[-10px]"
+              id="clock"
+              title="Sat 14 November, 2026 at 10 AM"
+            >
+              31:01:01:00
+            </h2>
             <p class="text-md text-[#783D2B] flex items-center gap-1">
               <i class="ph ph-eye text-[20px] translate-y-[0.5px]"></i>
               <span id="spec">1</span>
@@ -126,35 +163,81 @@
         </div>
 
         <div class="md:w-1/2">
-          <div id="pakistan-map" class="w-full h-[400px] md:h-[550px] isolate rounded-2xl"></div>
+          <div
+            id="pakistan-map"
+            class="w-full h-[400px] md:h-[550px] isolate rounded-2xl"
+          ></div>
         </div>
       </header>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start"></div>
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start"
+      ></div>
       <section class="mt-16">
-        <h2 class="text-3xl md:text-4xl font-bold text-[#783D2B] mb-6 text-center underline decoration-[#783D2B] decoration-2 underline-offset-4">
+        <h2
+          class="text-3xl md:text-4xl font-bold text-[#783D2B] mb-6 text-center underline decoration-[#783D2B] decoration-2 underline-offset-4"
+        >
           Is this legit?
         </h2>
-        <p class="md:text-xl text-[#783D2B] mb-6 text-center">yes! we've organized and attended these events in the past for free!</p>
-        <div class="relative mx-auto w-full max-w-4xl md:max-w-6xl h-[520px] md:h-[640px] mt-10">
-          <img src="past/sunbeam-isb.jpg" alt="sunbeam islamabad"class="absolute top-[2%] left-[31%] w-[60%] md:w-[34%] rotate-2 border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform">
-          <img src="past/cflhr1.JPG" alt="campfire lahore" class="absolute top-0 left-0 w-[65%] md:w-[38%] -rotate-6 border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform">
-          <img src="past/cflhr2.JPG" alt="campfire lahore" class="absolute top-[10%] right-0 w-[60%] md:w-[36%] rotate-3 border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform">
-          <img src="past/arcana.jpg" alt="arcana" class="absolute top-[38%] left-[4%] md:top-[45%] md:left-[18%] w-[60%] md:w-[36%] rotate-[8deg] border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform">
-          <img src="past/cflhr3.jpg" alt="" class="absolute top-[48%] right-[4%] md:top-[40%] md:right-[16%] w-[58%] md:w-[34%] -rotate-3 border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform">
+        <p class="md:text-xl text-[#783D2B] mb-6 text-center">
+          yes! we've organized and attended these events in the past for free!
+        </p>
+        <div
+          class="relative mx-auto w-full max-w-4xl md:max-w-6xl h-[520px] md:h-[640px] mt-10"
+        >
+          <img
+            src="past/sunbeam-isb.jpg"
+            alt="sunbeam islamabad"
+            class="absolute top-[2%] left-[31%] w-[60%] md:w-[34%] rotate-2 border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform"
+          />
+          <img
+            src="past/cflhr1.JPG"
+            alt="campfire lahore"
+            class="absolute top-0 left-0 w-[65%] md:w-[38%] -rotate-6 border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform"
+          />
+          <img
+            src="past/cflhr2.JPG"
+            alt="campfire lahore"
+            class="absolute top-[10%] right-0 w-[60%] md:w-[36%] rotate-3 border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform"
+          />
+          <img
+            src="past/arcana.jpg"
+            alt="arcana"
+            class="absolute top-[38%] left-[4%] md:top-[45%] md:left-[18%] w-[60%] md:w-[36%] rotate-[8deg] border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform"
+          />
+          <img
+            src="past/cflhr3.jpg"
+            alt=""
+            class="absolute top-[48%] right-[4%] md:top-[40%] md:right-[16%] w-[58%] md:w-[34%] -rotate-3 border-[12px] border-[#FFF4E0] shadow-xl object-cover aspect-[4/3] hover:rotate-0 hover:scale-105 hover:z-10 transition-transform"
+          />
         </div>
       </section>
     </div>
-    <div id="s-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 md:backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-200">
+    <div
+      id="s-modal"
+      class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 md:backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-200"
+    >
       <div class="card max-w-[90vw] w-md mx-4 p-6 relative border-[#783D2B]">
-        <button id="close-mod" class="absolute top-2 right-2 text-[#DFA063] hover:text-[#783D2B] transition-colors">
+        <button
+          id="close-mod"
+          class="absolute top-2 right-2 text-[#DFA063] hover:text-[#783D2B] transition-colors"
+        >
           <i class="ph ph-x"></i>
         </button>
         <h3 id="mod-h" class="text-xl font-bold text-[#783D2B] mb-6 pr-6"></h3>
         <div class="flex flex-col gap-3">
-          <a href="https://creators.hackclub.com/r/MHAMMGNA" target="_blank" class="btn-primary mb-0 text-center text-sm">
+          <a
+            href="https://creators.hackclub.com/r/MHAMMGNA"
+            target="_blank"
+            class="btn-primary mb-0 text-center text-sm"
+          >
             I do not have a Slack account
           </a>
-          <a id="si-btn" href="#" target="_blank" class="btn-social text-center text-sm py-2 h-10">
+          <a
+            id="si-btn"
+            href="#"
+            target="_blank"
+            class="btn-social text-center text-sm py-2 h-10"
+          >
             I have Slack installed
           </a>
         </div>
@@ -162,11 +245,378 @@
     </div>
     <footer class="text-center mt-10 text-[#783D2B]">
       Made with :3 and &lt;3 by
-      <a class="dont hover:bg-[#783D2B] hover:text-[#F9DD60] hover:px-1" href="https://alimad.co" target="_blank">Muhammad Ali</a>
+      <a
+        class="dont hover:bg-[#783D2B] hover:text-[#F9DD60] hover:px-1"
+        href="https://alimad.co"
+        target="_blank"
+        >Muhammad Ali</a
+      >
       and
-      <a class="dont hover:bg-[#783D2B] hover:text-[#F9DD60] hover:px-1" href="https://adventurous-alisha.vercel.app" target="_blank">Alisha</a>.
+      <a
+        class="dont hover:bg-[#783D2B] hover:text-[#F9DD60] hover:px-1"
+        href="https://adventurous-alisha.vercel.app"
+        target="_blank"
+        >Alisha</a
+      >.
     </footer>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="script.js"></script>
+    <script>
+      const g = e => document.getElementById(e)
+      const q = e => document.querySelectorAll(e)
+
+      function acc() {
+        q('.accordion-toggle').forEach(button => {
+          button.addEventListener('click', () => {
+            const content = button.nextElementSibling
+            const icon = button.querySelector('svg, i')
+            const isExpanded = content.style.maxHeight
+
+            q('.accordion-content').forEach(el => {
+              el.style.maxHeight = null
+            })
+            q('.accordion-toggle svg, .accordion-toggle i').forEach(el => {
+              el.style.transform = 'rotate(0deg)'
+            })
+
+            if (!isExpanded) {
+              content.style.maxHeight = content.scrollHeight + 'px'
+              icon.style.transform = 'rotate(180deg)'
+            }
+          })
+        })
+      }
+
+      function getSignups() {
+        fetch('https://haven.hackclub.com/api/signups')
+          .then(e => e.json())
+          .then(e => {
+            e.events.forEach(d => {
+              const x = g(d.slug + '-signup')
+              if (x) {
+                let lim =
+                  d.slug == 'lahore'
+                    ? 150
+                    : Math.floor((d.signups - 1) / 100 + 1) * 100
+                x.innerText = d.signups + '/' + lim
+                if (d.signups / lim > 0.9) {
+                  x.parentElement.style.color = '#FC8616'
+                }
+              }
+            })
+          })
+      }
+
+      function create(tag, className, innerHTML = '', props = {}) {
+        const el = document.createElement(tag)
+        if (className) el.className = className
+        if (innerHTML) el.innerHTML = innerHTML
+        if (props) {
+          el.href = props.href
+          el.target = props.target
+        }
+        return el
+      }
+
+      function saturate(events) {
+        const container = q('.grid')[0]
+        container.innerHTML = ''
+        events.forEach(event => {
+          const card = create('div', 'card')
+          card.classList.add('card-' + event.slug)
+          card.classList.add(
+            `bg-[linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.6)),url('cities/${event.slug}.jpg')]`
+          )
+          card.appendChild(
+            create('h2', 'text-2xl font-bold text-[#FFF4E0] mb-3', event.name)
+          )
+          const infoContainer = create(
+            'div',
+            'flex flex-col gap-0 mb-4 text-sm font-medium'
+          )
+          infoContainer.appendChild(
+            create(
+              'a',
+              'flex items-center gap-2.5 text-[#F9DD60] dont',
+              `<i class="ph ph-users flex items-center justify-center w-5"></i> 
+       <span class="leading-none" id="${event.slug}-signup">0/100</span>`,
+              {
+                href: 'https://daven.haven.hackclub.com/' + event.slug,
+                target: '_blank'
+              }
+            )
+          )
+          infoContainer.appendChild(
+            create(
+              event.venueUrl ? 'a' : 'div',
+              'flex items-center gap-2.5 text-[#F9DD60] dont',
+              `<i class="ph ph-map-pin flex items-center justify-center w-5"></i> 
+       <span class="leading-none">${event.venue || 'Unconfirmed'}</span>`,
+              event.venueUrl
+                ? {
+                    href: 'https://' + event.venueUrl,
+                    target: '_blank'
+                  }
+                : null
+            )
+          )
+          card.appendChild(infoContainer)
+          const sub = create('a', 'btn-primary', 'Sign Up Now')
+          sub.href = `https://forms.hackclub.com/haven-signup?event=${event.id}`
+          sub.target = '_blank'
+          card.appendChild(sub)
+          card.appendChild(
+            create(
+              'button',
+              'accordion-toggle accordion-btn',
+              `<span class="font-semibold text-sm leading-none">Show More</span>
+       <i class="fa-solid fa-angle-down text-lg flex items-center justify-center leading-none transition-transform duration-300"></i>`
+            )
+          )
+          const accContent = create(
+            'div',
+            'accordion-content overflow-hidden max-h-0 transition-all duration-300'
+          )
+          const lg = create('div', 'pt-4 grid grid-cols-1 sm:grid-cols-2 gap-2')
+          const addLink = (href, icon, text) => {
+            if (!href) return
+            const link = create(
+              'a',
+              'btn-social',
+              `<i class="${icon}"></i><span>${text}</span>`
+            )
+            link.href = href
+            lg.appendChild(link)
+          }
+          addLink(
+            `https://haven.hackclub.com/${event.slug}`,
+            'ph ph-globe',
+            'Page'
+          )
+          if (event.insta)
+            addLink(
+              `https://instagram.com/${event.insta}`,
+              'ph ph-instagram-logo',
+              'Instagram'
+            )
+          if (event.slack) {
+            const slackUrl = `https://hackclub.enterprise.slack.com/archives/${event.slack}`
+            const link = create(
+              'a',
+              'btn-social cursor-pointer',
+              `<i class="ph ph-slack-logo"></i><span>Slack</span>`
+            )
+            link.addEventListener('click', e => {
+              e.preventDefault()
+              openSlock(`haven-${event.slug}`, slackUrl)
+            })
+            lg.appendChild(link)
+          }
+          addLink(
+            `mailto:${event.slug}@haven.hackclub.com`,
+            'ph ph-envelope-simple',
+            'Email'
+          )
+          if (event.wa)
+            addLink(
+              `https://wa.me/${event.wa}`,
+              'ph ph-whatsapp-logo',
+              'WhatsApp'
+            )
+          if (event.custom) {
+            for (const [key, value] of Object.entries(event.custom)) {
+              addLink(
+                value,
+                'ph ph-' + (key == 'Organize' ? 'clipboard' : 'info'),
+                key
+              )
+            }
+          }
+          accContent.appendChild(lg)
+          card.appendChild(accContent)
+          container.appendChild(card)
+        })
+        acc()
+        getSignups()
+      }
+
+      fetch('/events.txt')
+        .then(e => e.text())
+        .then(e => {
+          const eventsText = e.split('#')[1].trim().split(';')
+          let out = []
+          eventsText.forEach(d => {
+            if (!d.trim()) return
+            let j = {}
+            const s = d.replaceAll('\n', '').split(',')
+            j.slug = s[0].trim()
+            j.name = j.slug.charAt(0).toUpperCase() + j.slug.slice(1)
+            j.venue = s[1]?.trim()
+            j.venueUrl = s[2]?.trim()
+            j.id = s[3]?.trim()
+            j.insta = s[4]?.trim()
+            j.slack = s[5]?.trim()
+            j.wa = s[6]?.trim()
+            j.custom = {}
+
+            for (let i = 7; i < s.length; i++) {
+              if (!s[i].trim()) continue
+              const k = s[i].split('=')
+              if (k.length === 2) j.custom[k[0].trim()] = k[1].trim()
+            }
+            out.push(j)
+          })
+          saturate(out)
+        })
+
+      const start = new Date('2026-11-14T10:00:00+05:00')
+
+      let tmt = 2682060
+      let tls = tmt * 1000
+
+      const timer = () => {
+        const now = new Date()
+        const tml = start - now
+        const t = 0.1
+        tls = (1 - t) * tls + t * tml
+        if (tls <= 0) {
+          clearInterval(timer)
+          g('clock').textContent = "It's started chat"
+          return
+        }
+        const days = Math.floor(tls / (1000 * 60 * 60 * 24))
+        const hours = Math.floor(
+          (tls % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        )
+        const minutes = Math.floor((tls % (1000 * 60 * 60)) / (1000 * 60))
+        const seconds = Math.floor((tls % (1000 * 60)) / 1000)
+        const pad = num => String(num).padStart(2, '0')
+
+        g('clock').textContent = `
+    ${pad(days)}:${pad(hours)}:${pad(minutes)}:${pad(seconds)}
+  `
+        requestAnimationFrame(timer)
+      }
+      timer()
+
+      function openSlock(slug, channel) {
+        g('mod-h').innerText = 'Open #' + slug
+        g('si-btn').href = channel
+        g('s-modal').classList.remove('opacity-0', 'pointer-events-none')
+      }
+
+      const close = () =>
+        g('s-modal').classList.add('opacity-0', 'pointer-events-none')
+
+      g('close-mod')?.addEventListener('click', close)
+      g('s-modal')?.addEventListener('click', e => {
+        if (e.target.id === 's-modal') close()
+      })
+
+      setInterval(() => {
+        fetch('https://live.alimad.co/ping?app=havens-pk')
+          .then(e => e.text())
+          .then(d => (g('spec').textContent = d))
+      }, 20000)
+
+      const map = L.map('pakistan-map', {
+        zoomControl: false,
+        scrollWheelZoom: false,
+        doubleClickZoom: false,
+        touchZoom: false,
+        boxZoom: false,
+        keyboard: false,
+        dragging: false,
+        attributionControl: false,
+        zoomSnap: 0
+      })
+
+      map.setView([30.3753, 69.3451], 5)
+      map.createPane('cities')
+      map.getPane('cities').style.zIndex = 650
+
+      L.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+        {
+          maxZoom: 19
+        }
+      ).addTo(map)
+
+      let pkBounds
+      const fit = () => {
+        map.invalidateSize()
+        map.fitBounds(pkBounds, { padding: [10, 10], animate: false })
+      }
+
+      fetch('pakistan.geojson')
+        .then(response => response.json())
+        .then(pakistan => {
+          const polys =
+            pakistan.geometry.type === 'Polygon'
+              ? [pakistan.geometry.coordinates]
+              : pakistan.geometry.coordinates
+
+          const holes = polys.map(poly =>
+            poly[0].map(([lng, lat]) => [lat, lng])
+          )
+
+          const world = [
+            [-85, -180],
+            [-85, 180],
+            [85, 180],
+            [85, -180]
+          ]
+
+          L.polygon([world, ...holes], {
+            stroke: false,
+            fillColor: '#DFA063',
+            fillOpacity: 1,
+            interactive: false
+          }).addTo(map)
+
+          const border = L.geoJSON(pakistan, {
+            interactive: false, // so clicks reach the dots
+            style: {
+              color: '#783D2B',
+              weight: 2,
+              opacity: 1,
+              fillColor: '#E87136',
+              fillOpacity: 0.25
+            }
+          }).addTo(map)
+
+          pkBounds = border.getBounds()
+          fit()
+          window.addEventListener('resize', fit)
+          document.getElementById('pakistan-map').classList.add('ready')
+        })
+        .catch(() => {
+          document.getElementById('pakistan-map').classList.add('ready')
+        })
+
+      const cities = [
+        { name: 'Karachi', slug: 'karachi', coords: [24.8607, 67.0011] },
+        { name: 'Lahore', slug: 'lahore', coords: [31.5204, 74.3587] },
+        { name: 'Islamabad', slug: 'islamabad', coords: [33.6844, 73.0479] },
+        { name: 'Peshawar', slug: 'peshawar', coords: [34.0151, 71.5249] },
+        { name: 'Bahawalpur', slug: 'bahawalpur', coords: [29.3956, 71.6836] },
+        { name: 'Mirpurkhas', slug: 'mirpurkhas', coords: [25.5269, 69.0111] }
+      ]
+
+      cities.forEach(city => {
+        L.circleMarker(city.coords, {
+          pane: 'cities',
+          radius: 7,
+          color: '#783D2B',
+          weight: 2,
+          fillColor: '#F9DD60',
+          fillOpacity: 1
+        })
+          .addTo(map)
+          .bindPopup(
+            `<b>${city.name}</b><br><a href="https://haven.hackclub.com/${city.slug}" target="_blank">Open event page →</a>`,
+            { autoPan: false }
+          )
+      })
+    </script>
   </body>
 </html>
