@@ -59,7 +59,8 @@ function saturate (events) {
   container.innerHTML = ''
   events.forEach(event => {
     const card = create('div', 'card')
-    card.classList.add('card-' + event.slug) 
+    card.classList.add('card-' + event.slug);
+    card.classList.add(`bg-[linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.6)),url('cities/${event.slug}.jpg')]`);
     card.appendChild(
       create('h2', 'text-2xl font-bold text-[#FFF4E0] mb-3', event.name)
     )
