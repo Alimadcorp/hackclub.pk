@@ -58,20 +58,20 @@
         ::selection {
           @apply text-[#783D2B] bg-[#F9DD60];
         }
-        a:not(.dont):not(.btn-primary):not(.btn-social) {
+        a:not(.dont):not(.leaflet-popup-close-button) {
           @apply relative overflow-hidden;
         }
-        a:not(.dont):not(.btn-primary):not(.btn-social)::after {
-          @apply content-[''] absolute top-0 right-0 w-0 h-full bg-white border-0 border-transparent rounded-[1.25rem] z-[4] mix-blend-difference transition-[width,border-radius] ease-in pointer-events-none;
+        a:not(.dont):not(.leaflet-popup-close-button)::after {
+          @apply content-[''] absolute top-0 right-0 w-0 h-full bg-white/50 border-0 border-transparent rounded-[1.25rem] z-[4] mix-blend-overlay transition-[width,border-radius] ease-in pointer-events-none;
         }
-        a:not(.dont):not(.btn-primary):not(.btn-social):hover::after {
+        a:not(.dont):not(.leaflet-popup-close-button):hover::after {
           @apply left-0 right-auto border-0 border-white rounded-none w-full transition-[width] ease-in;
         }
         #pakistan-map {
           @apply opacity-0 transition-all;
         }
         #pakistan-map.ready {
-          @apply opacity-1;
+          @apply opacity-100;
         }
         .leaflet-container {
           @apply bg-transparent cursor-default;
@@ -81,6 +81,9 @@
         }
         .pk-flag {
           @apply bg-[url('cities/pk-flag.webp')] bg-cover bg-center bg-clip-text text-transparent;
+        }
+        .leaflet-popup-tip, .leaflet-popup-content-wrapper, .leaflet-popup-content {
+          @apply bg-[#F9DD60] text-[#783D2B] font-['Ubuntu',sans-serif];
         }
       }
       .btn-primary,
@@ -533,7 +536,7 @@
       })
         .addTo(map)
         .bindPopup(
-          `<b>${city.name}</b><br><a href="https://haven.hackclub.com/${city.slug}" target="_blank">Open event page →</a>`,
+          `<b>${city.name}</b><br><a href="https://haven.hackclub.com/${city.slug}" target="_blank">Open event page</a>`,
           { autoPan: false }
         )
     })
