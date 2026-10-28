@@ -41,8 +41,8 @@ C0BRVAD1206
 ;
 
 bahawalpur,
-,
-,
+The Programmer High School Bahawalpur,
+maps.app.goo.gl/C9zqgsKka9EAywSZ9,
 recZFy6AeLmeY2yjm,
 haven.bwp.hackclub,
 C0C16CVLNNM
