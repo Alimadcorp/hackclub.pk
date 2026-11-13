@@ -169,7 +169,7 @@
       <button id="close-mod" class="absolute top-2 right-2 text-[#DFA063] hover:text-[#783D2B] transition-colors">
         <i class="ph ph-x"></i>
       </button>
-      <h3 id="mod-h" class="text-xl font-bold text-[#783D2B] mb-6 pr-6"></h3>
+      <h3 id="mod-h" class="text-xl font-bold text-white mb-6 pr-6"></h3>
       <div class="flex flex-col gap-3">
         <a href="https://creators.hackclub.com/r/MHAMMGNA" target="_blank" class="btn-primary mb-0 text-center text-sm">
           I do not have a Slack account
@@ -393,8 +393,12 @@
 
           for (let i = 8; i < s.length; i++) {
             if (!s[i].trim()) continue
-            const k = s[i].split('=')
-            if (k.length === 2) j.custom[k[0].trim()] = k[1].trim()
+            const eqIndex = s[i].indexOf('=')
+            if (eqIndex !== -1) {
+              const key = s[i].slice(0, eqIndex).trim()
+              const val = s[i].slice(eqIndex + 1).trim()
+              j.custom[key] = val
+            }
           }
           out.push(j)
         })
