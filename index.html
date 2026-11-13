@@ -223,9 +223,8 @@
             const x = g(d.slug + '-signup')
             if (x) {
               let lim =
-                d.slug == 'lahore'
-                  ? 150
-                  : Math.floor((d.signups - 1) / 100 + 1) * 100
+                eventLimits[d.slug] ||
+                Math.floor((d.signups - 1) / 100 + 1) * 100
               x.innerText = d.signups + '/' + lim
               if (d.signups / lim > 0.9) {
                 x.parentElement.style.color = '#FC8616'
@@ -267,7 +266,7 @@
             'a',
             'flex items-center gap-2.5 text-[#F9DD60] dont',
             `<i class="ph ph-users flex items-center justify-center w-5"></i> 
-       <span class="leading-none" id="${event.slug}-signup">0/100</span>`,
+       <span class="leading-none" id="${event.slug}-signup">0/${event.limit || 100}</span>`,
             {
               href: 'https://daven.haven.hackclub.com/' + event.slug,
               target: '_blank'
@@ -368,6 +367,8 @@
       getSignups()
     }
 
+    let eventLimits = {}
+
     fetch('/events.txt')
       .then(e => e.text())
       .then(e => {
@@ -385,9 +386,11 @@
           j.insta = s[4]?.trim()
           j.slack = s[5]?.trim()
           j.wa = s[6]?.trim()
+          j.limit = parseInt(s[7]?.trim()) || null
+          eventLimits[j.slug] = j.limit
           j.custom = {}
 
-          for (let i = 7; i < s.length; i++) {
+          for (let i = 8; i < s.length; i++) {
             if (!s[i].trim()) continue
             const k = s[i].split('=')
             if (k.length === 2) j.custom[k[0].trim()] = k[1].trim()
