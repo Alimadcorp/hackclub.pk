@@ -1,6 +1,16 @@
 format:
-slug, venue, venue-url, id, insta-id, slack-channel-id, whatsapp, Extra1=url, Extra2=url
-, for nothing
+slug,
+venue,
+venue-url,
+id,
+insta-id,
+slack-channel-id,
+whatsapp,
+signups-limit,
+Extra1=url,
+Extra2=url
+
+
 write below this hashtag
 #
 
@@ -9,7 +19,9 @@ Kickstart | 9th Avenue,
 maps.app.goo.gl/p3E2V8LbePL9YZBJ8,
 recjkNQ5LBfwfGg3i,
 haven.isb.hackclub,
-C0BPVR0EVMY
+C0BPVR0EVMY,
+,
+200
 ;
 
 lahore,
@@ -19,6 +31,7 @@ recvZSgonjXCIcFSA,
 haven.lhr,
 C0BRVGWHLA1,
 923124503700,
+150,
 Organize=https://alimad.fillout.com/haven-org
 ;
 
@@ -29,6 +42,7 @@ recHvvpPOom2zTNXL,
 haven.peshawar.hackclub,
 C0BTP85CVBJ,
 ,
+100,
 Organize=https://peshawar.fillout.com/haven-organizer
 ;
 
@@ -37,7 +51,9 @@ karachi,
 ,
 rec2xCDW78z5uYYYj,
 haven.karachii.hackclub,
-C0BRVAD1206
+C0BRVAD1206,
+,
+100
 ;
 
 bahawalpur,
@@ -45,7 +61,9 @@ The Programmer High School Bahawalpur,
 maps.app.goo.gl/C9zqgsKka9EAywSZ9,
 recZFy6AeLmeY2yjm,
 haven.bwp.hackclub,
-C0C16CVLNNM
+C0C16CVLNNM,
+,
+100
 ;
 
 mirpurkhas,
@@ -53,5 +71,7 @@ AJ Science College,
 maps.app.goo.gl/9ZCRxqwtqSCF8b7q7,
 reckNKin9u20dMVD5,
 haven.mirpurkhas.hackclub,
-C0C26S81LG0
+C0C26S81LG0,
+,
+100
 ;
