@@ -372,12 +372,13 @@
     fetch('/events.txt')
       .then(e => e.text())
       .then(e => {
-        const eventsText = e.split('#')[1].trim().split(';')
+        const hashIndex = e.indexOf('#')
+        const eventsText = (hashIndex !== -1 ? e.slice(hashIndex + 1) : e).trim().split(';')
         let out = []
         eventsText.forEach(d => {
           if (!d.trim()) return
           let j = {}
-          const s = d.replaceAll('\n', '').split(',')
+          const s = d.replace(/[\r\n]/g, '').split(',')
           j.slug = s[0].trim()
           j.name = j.slug.charAt(0).toUpperCase() + j.slug.slice(1)
           j.venue = s[1]?.trim()
